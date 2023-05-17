@@ -6,7 +6,7 @@ typedef long double ld;
 #define endl "\n"
 #define F first
 #define S second
-const int mod = 1e7;
+const int mod = 1e9+7;
 
 void fast(){
     ios_base::sync_with_stdio(false);
@@ -81,6 +81,7 @@ vector<int> prime_factorization(ll n){ //o(sqrt(n))
 
     return ans;
 }
+
 ll fact[N], inv[N];
 ll factorial(ll n){ // n! ---> o(n)
     vector<ll> v(n+1);
