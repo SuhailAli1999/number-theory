@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
-
 typedef long long ll;
 typedef long double ld;
 #define endl "\n"
 #define F first
 #define S second
-const int mod = 1e9+7;
+const int mod = 1e7;
+const int N = 1e7;
 
 void fast(){
     ios_base::sync_with_stdio(false);
@@ -15,7 +15,6 @@ void fast(){
 
 // custom sort in priority queue
 struct cmp1 {
-
     bool operator()(pair<int, int> const& a, pair<int, int> const& b){
       if(a.first == b.first){
             return a.second > b.second;
@@ -24,10 +23,13 @@ struct cmp1 {
          return a.first < b.first;
         }
     }
-}
+};
+
+
 ll fix_mod(ll a, ll b){
     return (a % b + b) % b;
 }
+
 vector<int> get_divisors(int n){ // o(sqrt(n)) //factoring
     vector<int> ans;
     for(int i=1; i*i<= n; i++){
@@ -40,6 +42,7 @@ vector<int> get_divisors(int n){ // o(sqrt(n)) //factoring
     }
     return ans;
 }
+
 vector<int> get_multiples(int x, int n){
     vector<int> ans;
     for(int m=x; m<=n; m+=x){
@@ -47,8 +50,9 @@ vector<int> get_multiples(int x, int n){
     }
     return ans;
 }
-bool is_prime(int n){ // o(sqrt(n))
 
+bool is_prime(int n){ // o(sqrt(n))
+    if(n==1) return false;
     for(int p=2; p*p <= n; p++){
         if(n%p==0){
             return false;
@@ -56,6 +60,7 @@ bool is_prime(int n){ // o(sqrt(n))
     }
     return true;
 }
+
 void sieve(int isPrime[], int N){ // o(n) -- o(n log(log(n)))
     fill(isPrime, isPrime+N, true);
     isPrime[0] = isPrime[1] = false;
@@ -67,6 +72,7 @@ void sieve(int isPrime[], int N){ // o(n) -- o(n log(log(n)))
         }
     }
 }
+
 vector<int> prime_factorization(ll n){ //o(sqrt(n))
     vector<int> ans;
     for (int p=2; p*p<=n; p++){
@@ -83,15 +89,7 @@ vector<int> prime_factorization(ll n){ //o(sqrt(n))
 }
 
 ll fact[N], inv[N];
-ll factorial(ll n){ // n! ---> o(n)
-    vector<ll> v(n+1);
-    v[0] = 1;
-    for(int i=1; i<n+1; i++){
-        v[i] = v[i-1] * i;
-        v[i]%= mod;
-    }
-    return v[n];
-}
+
 int fastPower(int base, int power){
     if(power == 0) return 1;
     if(power == 1) return base;
@@ -100,6 +98,17 @@ int fastPower(int base, int power){
     // if base odd
     if(power%2) ans*=base;
     return ans;
+}
+
+ll factorial(ll n){ // n! ---> o(n)
+    vector<ll> v(n+1);
+    fact[0] = inv[0] = 1;
+    for(int i=1; i<=n; i++){
+        v[i] = v[i-1] * i;
+        v[i]%= mod;
+        inv[i] = fastPower(fact[i], mod - 2);
+    }
+    return v[n];
 }
 
 ll modInv(ll n) {
@@ -128,9 +137,16 @@ void complete_search (int n){
     }
 }
 
+bool is_perfect_square(long double x){
+    if (x >= 0) {
+        long long sr = sqrt(x);
+        return (sr * sr == x);
+    }
+    return false;
+}
+
 void solve(){
 
-cout << fastPower(3,10) << endl;
 }
 
 
