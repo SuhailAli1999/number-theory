@@ -15,6 +15,7 @@ void fast(){
 
 // custom sort in priority queue
 struct cmp1 {
+
     bool operator()(pair<int, int> const& a, pair<int, int> const& b){
       if(a.first == b.first){
             return a.second > b.second;
@@ -88,8 +89,6 @@ vector<int> prime_factorization(ll n){ //o(sqrt(n))
     return ans;
 }
 
-ll fact[N], inv[N];
-
 int fastPower(int base, int power){
     if(power == 0) return 1;
     if(power == 1) return base;
@@ -100,9 +99,15 @@ int fastPower(int base, int power){
     return ans;
 }
 
+ll modInv(ll n) {
+    return fastPower(n, mod - 2);
+}
+
+ll fact[N], inv[N];
+
 ll factorial(ll n){ // n! ---> o(n)
     vector<ll> v(n+1);
-    fact[0] = inv[0] = 1;
+    v[0] = 1;
     for(int i=1; i<=n; i++){
         v[i] = v[i-1] * i;
         v[i]%= mod;
@@ -111,9 +116,6 @@ ll factorial(ll n){ // n! ---> o(n)
     return v[n];
 }
 
-ll modInv(ll n) {
-    return fastPower(n, mod - 2);
-}
 ll nCr(ll n, ll r) {
     return ((fact[n] * inv[r]) % mod * inv[n - r]) % mod;
 }
