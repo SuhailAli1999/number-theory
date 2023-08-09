@@ -74,6 +74,18 @@ void sieve(int isPrime[], int N){ // o(n) -- o(n log(log(n)))
     }
 }
 
+void prime_factorization_sieve(int isPrime[], int N){ // o(n) -- o(n log(log(n)))
+    fill(isPrime, isPrime+N, true);
+    isPrime[0] = isPrime[1] = false;
+    for(int p=2; p<N; p++){
+        if (isPrime[p] == 1){
+            for(int m = p; m<N; m+=p){
+                if(isPrime[m] == 1) isPrime[m]=p;
+            }
+        }
+    }
+}
+
 vector<int> prime_factorization(ll n){ //o(sqrt(n))
     vector<int> ans;
     for (int p=2; p*p<=n; p++){
